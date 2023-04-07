@@ -18,15 +18,16 @@ const createTimerAnimator = () => {
     timer = setInterval(
       //оборачивание в IIFE и возврат функции для моментального отрабатывания функции и обновления
       // оставшихся секунд, не дожидаясь выполнения первого интервала
-      (function () {
+      (function updateTime() {
         timerEl.innerText = createTimeStr(timeLimit);
         if (timeLimit <= 0) {
           clearInterval(timer);
-          setTimeout(() => alert("Time is over!"), 1); // добавление минмальной задержки, без которой рендер перед алертом не успеет выполниться
+          setTimeout(() => alert("Time is over!"), 1);
+          // добавление минмальной задержки, без которой рендер перед алертом не успеет выполниться
         } else {
           timeLimit--;
         }
-        return arguments.callee;
+        return updateTime;
       })(),
       1000
     );
