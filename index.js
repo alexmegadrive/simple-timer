@@ -9,6 +9,7 @@ const createTimerAnimator = () => {
     timer = setInterval(function () {
       if (timeLimit <= 0) {
         clearInterval(timer);
+        timerEl.innerText = '00:00:00'
         alert("Time is over!");
       } else {
         let seconds = timeLimit % 60,
