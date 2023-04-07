@@ -7,17 +7,16 @@ const createTimerAnimator = () => {
   return (timeLimit) => {
     clearInterval(timer);
     timer = setInterval(function () {
-      if (timeLimit <= 0) {
-        clearInterval(timer);
-        timerEl.innerText = '00:00:00'
-        alert("Time is over!");
-      } else {
-        let seconds = timeLimit % 60,
+		 let seconds = timeLimit % 60,
           hours = Math.floor(timeLimit / 3600),
           minutes = Math.floor((timeLimit - hours * 3600) / 60);
         timerEl.innerText = [hours, minutes, seconds]
           .map((el) => el.toString().padStart(2, 0))
           .join(":");
+      if (timeLimit <= 0) {
+        clearInterval(timer);
+		setTimeout(() => alert("Time is over!"), 1)
+      } else {
         timeLimit--;
       }
     }, 1000);
